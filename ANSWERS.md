@@ -1,72 +1,31 @@
-# Assessment Answers
+# Part A — Answers
 
-## 1. How did you implement the queue?
+## A1 — Queue Logic
 
-I used a JavaScript array to store waiting patients.
+I would keep the waiting patients in arrival order, but when choosing the next patient I would first look for the earliest waiting Emergency patient. If an Emergency patient exists, that patient is called first. If there are no Emergency patients, I would call the earliest waiting General patient. This keeps Emergency patients ahead while preserving arrival order within each group.
 
-Each patient is represented as an object containing:
+---
 
-- Token
-- Name
-- Age
-- Visit Type
+## A2 — Spot the Bug
 
-The queue is displayed dynamically using JavaScript.
+There are two main bugs in this function.
 
-## 2. How does Emergency priority work?
+First, the `return queue[i]` statement is inside the `for` loop, so the function returns after checking only the first patient. It never checks the remaining patients.
 
-When Call Next Patient is selected, the system first searches for an Emergency patient.
+Second, the function returns the first patient even when that patient is not waiting. The return should happen only after finding a patient whose status is `"waiting"`.
 
-If an Emergency patient exists, the earliest Emergency patient is selected.
+A better approach is to loop through all patients, find the first waiting patient, mark them as `"in-progress"`, and then return them. If no waiting patient exists, the function should return `null` or an appropriate empty result.
 
-If there are no Emergency patients, the earliest General patient is selected.
+---
 
-This preserves FIFO order within each visit type.
+## A3 — SQL Reasoning
 
-## 3. How does Skip & Re-queue work?
-
-When the current patient is skipped, the patient is temporarily stored.
-
-The system counts the next two completed patients.
-
-After two patients are served, the skipped patient is returned to the waiting queue.
-
-## 4. How is persistence implemented?
-
-I used browser localStorage.
-
-The application stores:
-
-- Waiting patients
-- Completed patients
-- Next token number
-
-When the application loads, the stored data is retrieved and displayed again.
-
-## 5. How are edge cases handled?
-
-The application validates:
-
-- Empty patient name
-- Invalid age
-- Empty queue
-- Calling another patient while someone is already being served
-- Rapid duplicate registration
-
-User-friendly messages are displayed when an invalid action is attempted.
-
-## 6. What was the main implementation challenge?
-
-The main challenge was implementing the queue rules correctly while handling Emergency priority, Skip & Re-queue, and persistence.
-
-I solved this by keeping the queue state in JavaScript variables and updating the UI whenever the state changes.
-
-## 7. What would I improve with more time?
-
-With more time I would improve:
-
-- Mobile responsiveness
-- Accessibility
-- More detailed queue status
-- Better visual indicators for Emergency patients
-- More comprehensive automated tests
+```sql
+SELECT
+    visit_date,
+    COUNT(*) AS total_visits,
+    SUM(CASE WHEN patient.dept = 'EMERGENCY' THEN 1 ELSE 0 END) AS emergency_visits
+FROM VISIT
+JOIN PATIENT patient ON VISIT.patient_id = patient.id
+GROUP BY visit_date
+ORDER BY visit_date;
