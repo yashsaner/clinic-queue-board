@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clinic Queue Board</title>
+   
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Clinic Queue Board</h1>
+
+    <!-- Patient Registration -->
+    <h2>Register Patient</h2>
+
+    <form id="patientForm">
+
+        <!-- Patient Name -->
+        <label for="patientName">Patient Name:</label>
+        <input type="text" id="patientName" placeholder="Enter patient name">
+
+        <br><br>
+
+        <!-- Patient Age -->
+        <label for="patientAge">Age:</label>
+        <input type="number" id="patientAge" placeholder="Enter age">
+
+        <br><br>
+
+        <!-- Visit Type -->
+        <label for="visitType">Visit Type:</label>
+
+        <select id="visitType">
+            <option value="General">General</option>
+            <option value="Emergency">Emergency</option>
+        </select>
+
+        <br><br>
+
+        <!-- Register Button -->
+        <button type="submit">Register Patient</button>
+
+    </form>
+<!-- Current Patient -->
+
+<h2>Now Serving</h2>
+
+<div id="nowServing">
+    <p>No patient is currently being served.</p>
+</div>
+
+<button id="callNextButton">Call Next Patient</button>
+<button id="completeButton">Complete Visit</button>
+<button id="skipButton">Skip Patient</button>
+
+<h2>Completed Today: <span id="completedCount">0</span></h2>
+
+<div id="completedList">
+    <p>No completed visits.</p>
+</div>
+
+<hr>
+    <hr>
+
+    <!-- Waiting Queue -->
+    <h2>Waiting Queue</h2>
+    
+    <div id="queueCounts">
+    <p>General Waiting: <span id="generalCount">0</span></p>
+    <p>Emergency Waiting: <span id="emergencyCount">0</span></p>
+</div>
+
+    <div id="waitingQueue">
+        <p>No patients waiting.</p>
+    </div>
+    <script src="script.js"></script>
+
+</div>
+
+</body>
+</html>
