@@ -290,3 +290,35 @@ skipButton.addEventListener("click", function() {
         "Patient skipped. They will return after two more patients are served."
     );
 });
+// Clear Today's Completed Visits
+const clearCompletedButton =
+    document.getElementById("clearCompletedButton");
+
+clearCompletedButton.addEventListener("click", function() {
+
+    // Check if there are completed visits
+    if (completedPatients.length === 0) {
+        alert("There are no completed visits to clear.");
+        return;
+    }
+
+    // Ask for confirmation
+    const confirmClear = confirm(
+        "Are you sure you want to clear all completed visits for today?"
+    );
+
+    if (!confirmClear) {
+        return;
+    }
+
+    // Clear completed visits
+    completedPatients = [];
+
+    // Save the updated data
+    saveData();
+
+    // Update the screen
+    displayCompletedPatients();
+
+    alert("Today's completed visits have been cleared.");
+});

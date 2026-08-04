@@ -462,3 +462,37 @@ hr {
         font-size: 28px;
     }
 }
+/* =========================================================
+   CLEAR TODAY'S VISITS
+   ========================================================= */
+
+.completed-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+#clearCompletedButton {
+    width: auto;
+    min-width: 190px;
+    background: #fff1f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 11px 18px;
+}
+
+#clearCompletedButton:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    box-shadow: 0 5px 14px rgba(220, 38, 38, 0.12);
+}
+
+@media (max-width: 600px) {
+    .completed-actions {
+        justify-content: stretch;
+    }
+
+    #clearCompletedButton {
+        width: 100%;
+    }
+}
